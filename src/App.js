@@ -65,6 +65,12 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 4;
   const [searchQuery, setSearchQuery] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark-mode', !darkMode);
+  };
 
   const filteredPosts = blogPosts.filter(
     (post) =>
@@ -106,11 +112,21 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const elements = document.querySelectorAll('.blog-post');
+    elements.forEach((el) => {
+      el.classList.add('visible'); // Ensure all posts are visible on load
+    });
+  }, []);
+
   return (
-    <div className="App">
+    <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
       <header className="App-header">
         <h1>My Blog</h1>
         <p className="tagline">Sharing my thoughts and experiences</p>
+        <button className="dark-mode-toggle" onClick={toggleDarkMode}>
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
       </header>
       <nav className="App-nav">
         <a href="#blog">Blog</a>
@@ -128,7 +144,7 @@ function App() {
         </div>
         <section id="blog" className="blog-grid">
           {filteredPosts.slice(indexOfFirstPost, indexOfLastPost).map((post) => (
-            <article key={post.id} className="blog-post">
+            <article key={post.id} className="blog-post visible">
               <img src={post.image} alt={post.title} className="blog-image" />
               <h2>{post.title}</h2>
               <p>{post.content}</p>
@@ -157,12 +173,12 @@ function App() {
         </section>
         <section id="contact" className="contact-section">
           <h2>Contact Me</h2>
-          <p>Feel free to reach out to me via email or follow me on social media:</p>
-          <ul>
-            <li>Email: myemail@example.com</li>
-            <li>Twitter: <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">@mytwitter</a></li>
-            <li>LinkedIn: <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">My LinkedIn</a></li>
-          </ul>
+          <form>
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send</button>
+          </form>
         </section>
       </main>
       {modalData && (
@@ -179,6 +195,17 @@ function App() {
       )}
       <footer className="App-footer">
         <p>&copy; 2025 My Blog. All rights reserved.</p>
+        <div className="social-links">
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+            Twitter
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+            LinkedIn
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+        </div>
       </footer>
     </div>
   );

@@ -7,6 +7,11 @@ body {
   color: #333;
 }
 
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -45,6 +50,9 @@ html {
 
 /* Navigation Bar */
 .App-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background-color: #007bff;
   padding: 10px;
   text-align: center;
@@ -102,6 +110,14 @@ main {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: left;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-in-out;
+}
+
+.blog-post.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .blog-post:hover {
@@ -163,6 +179,28 @@ main {
   margin-bottom: 10px;
 }
 
+.contact-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-section input,
+.contact-section textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.contact-section button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -206,7 +244,7 @@ main {
   max-width: 600px;
   width: 90%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.3s ease-in-out;
+  animation: fadeIn 0.5s ease-in-out;
   position: relative;
   text-align: center;
 }
@@ -250,9 +288,11 @@ main {
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -286,5 +326,16 @@ main {
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .App-nav {
+    flex-direction: column;
+    gap: 10px;
   }
 }
