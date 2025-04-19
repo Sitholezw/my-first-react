@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -42,6 +42,22 @@ function App() {
   const closeModal = () => {
     setModalData(null);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const elements = document.querySelectorAll('.blog-post');
+      elements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Trigger on page load
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="App">
