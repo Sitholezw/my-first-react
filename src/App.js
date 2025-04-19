@@ -24,6 +24,13 @@ function App() {
       fullContent: "Coding allows me to create amazing things from scratch. It's a skill that empowers creativity and problem-solving.",
       image: "https://via.placeholder.com/600x300?text=Why+I+Love+Coding",
     },
+    {
+      id: 4,
+      title: "Exploring JavaScript",
+      content: "JavaScript is the backbone of modern web development.",
+      fullContent: "JavaScript is the backbone of modern web development. It powers interactivity and dynamic content on websites.",
+      image: "https://via.placeholder.com/600x300?text=Exploring+JavaScript",
+    },
   ];
 
   const [modalData, setModalData] = useState(null);
@@ -42,16 +49,39 @@ function App() {
         <h1>My Blog</h1>
         <p className="tagline">Sharing my thoughts and experiences</p>
       </header>
+      <nav className="App-nav">
+        <a href="#blog">Blog</a>
+        <a href="#about">About Me</a>
+        <a href="#contact">Contact</a>
+      </nav>
       <main>
-        {blogPosts.map((post) => (
-          <article key={post.id} className="blog-post">
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-            <button className="read-more" onClick={() => openModal(post)}>
-              Read More
-            </button>
-          </article>
-        ))}
+        <section id="blog" className="blog-grid">
+          {blogPosts.map((post) => (
+            <article key={post.id} className="blog-post">
+              <img src={post.image} alt={post.title} className="blog-image" />
+              <h2>{post.title}</h2>
+              <p>{post.content}</p>
+              <button className="read-more" onClick={() => openModal(post)}>
+                Read More
+              </button>
+            </article>
+          ))}
+        </section>
+        <section id="about" className="about-section">
+          <h2>About Me</h2>
+          <p>
+            Hi, I'm a passionate developer who loves to share knowledge and build amazing things. This blog is my space to share my journey, thoughts, and experiences.
+          </p>
+        </section>
+        <section id="contact" className="contact-section">
+          <h2>Contact Me</h2>
+          <p>Feel free to reach out to me via email or follow me on social media:</p>
+          <ul>
+            <li>Email: myemail@example.com</li>
+            <li>Twitter: <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">@mytwitter</a></li>
+            <li>LinkedIn: <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">My LinkedIn</a></li>
+          </ul>
+        </section>
       </main>
       {modalData && (
         <div className="modal-overlay" onClick={closeModal}>
