@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import emailjs from 'emailjs-com';
 import './App.css';
 
 function App() {
@@ -7,7 +8,51 @@ function App() {
       id: 1,
       title: "Welcome to My Blog",
       content: "This is my first blog post. Stay tuned for more!",
-      fullContent: "This is my first blog post. Stay tuned for more exciting updates and stories about my journey!",
+      fullContent:
+       <p>
+
+        "I’m thrilled to have you here on my blog, a space dedicated to sharing ideas, experiences, and insights on topics that inspire me. Whether you stumbled upon this site by chance or you’re a returning reader, I appreciate your presence.
+        <br />
+
+        <h1>What You Can Expect </h1> 
+
+        In this blog, I plan to cover a variety of topics including:
+        <ul>
+          
+          <li>Technology: My thoughts on the latest trends in tech, programming tutorials, and reviews of tools I love.</li>
+
+          <li>Personal Growth: Sharing my journey and tips on self-improvement and mindfulness.</li>
+
+          <li>Travel Adventures: Exploring new places and cultures, and offering travel tips and itineraries.</li>
+
+          <li>Lifestyle & Wellbeing: Discussing health, fitness, and holistic living.</li>
+
+          <li>Creative Pursuits: Showcasing my hobbies, such as writing, photography, or any DIY projects.</li>
+
+          <li>Book & Movie Reviews: Sharing thoughts on the latest reads and films.</li>
+
+          <li>Personal Growth: Sharing my journey and tips on self-improvement and mindfulness. </li>
+
+          <li> 
+          Travel Adventures: Exploring new places and cultures, and offering travel tips and itineraries.Lifestyle & Wellbeing: Discussing health, fitness, and holistic living.
+          </li>
+
+          <li> 
+          Creative Pursuits: Showcasing my hobbies, such as writing, photography, or any DIY projects.
+          </li>
+
+          <li> 
+          Book & Movie Reviews: Sharing thoughts on the latest reads and films.
+          </li>
+         
+        </ul>
+        Join the ConversationI encourage you to engage with me! Feel free to leave comments, share your thoughts, or suggest topics you’d like me to explore. Let’s create a vibrant community where we can learn from each other.
+        <br/>
+        Thank you for visiting, and I hope you enjoy the journey ahead!
+        <br/>
+        Happy reading!!"
+
+        </p>, 
       image: "https://via.placeholder.com/600x300?text=Welcome+to+My+Blog",
     },
     {
@@ -96,6 +141,28 @@ function App() {
     setModalData(null);
   };
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_opk9h66', // Replace with your EmailJS service ID
+        'template_nhgte5q', // Replace with your EmailJS template ID
+        e.target,
+        'p9t7cTFJM_TjwOZ8i' // Replace with your EmailJS user ID
+      )
+      .then(
+        (result) => {
+          alert('Message sent successfully!');
+        },
+        (error) => {
+          alert('Failed to send message. Please try again.');
+        }
+      );
+
+    e.target.reset(); // Reset the form after submission
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const elements = document.querySelectorAll('.blog-post');
@@ -173,10 +240,10 @@ function App() {
         </section>
         <section id="contact" className="contact-section">
           <h2>Contact Me</h2>
-          <form>
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <textarea placeholder="Your Message" required></textarea>
+          <form onSubmit={sendEmail}>
+            <input type="text" name="user_name" placeholder="Your Name" required />
+            <input type="email" name="user_email" placeholder="Your Email" required />
+            <textarea name="message" placeholder="Your Message" required></textarea>
             <button type="submit">Send</button>
           </form>
         </section>
