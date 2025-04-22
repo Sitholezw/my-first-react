@@ -243,6 +243,7 @@ function App() {
           <form onSubmit={sendEmail}>
             <input type="text" name="user_name" placeholder="Your Name" required />
             <input type="email" name="user_email" placeholder="Your Email" required />
+            <input type="subject" name="user_subject" placeholder="Your Subject here" required />
             <textarea name="message" placeholder="Your Message" required></textarea>
             <button type="submit">Send</button>
           </form>
