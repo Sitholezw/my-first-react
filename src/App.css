@@ -379,6 +379,15 @@ main {
   cursor: pointer;
 }
 
+.hero {
+  background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+  color: #fff;
+  padding: 48px 0 32px 0;
+  text-align: center;
+  border-radius: 0 0 24px 24px;
+  margin-bottom: 32px;
+}
+
 @media (max-width: 768px) {
   .blog-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
