@@ -112,16 +112,20 @@ function App() {
   const postsPerPage = 4;
   const [searchQuery, setSearchQuery] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [selectedTag, setSelectedTag] = useState("All");
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode', !darkMode);
   };
 
+  const allTags = ["All", ...new Set(blogPosts.flatMap(post => post.tags || []))];
+
   const filteredPosts = blogPosts.filter(
     (post) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.content.toLowerCase().includes(searchQuery.toLowerCase())
+      (selectedTag === "All" || (post.tags && post.tags.includes(selectedTag))) &&
+      (post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+       post.content.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -209,6 +213,17 @@ function App() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+        </div>
+        <div className="tag-filter">
+          {allTags.map(tag => (
+            <button
+              key={tag}
+              className={selectedTag === tag ? "active" : ""}
+              onClick={() => setSelectedTag(tag)}
+            >
+              {tag}
+            </button>
+          ))}
         </div>
         <section id="blog" className="blog-grid">
           {filteredPosts.slice(indexOfFirstPost, indexOfLastPost).map((post) => (
