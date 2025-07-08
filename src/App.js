@@ -61,6 +61,7 @@ function App() {
       content: "React makes building UIs a breeze. Let's learn it together!",
       fullContent: "React makes building UIs a breeze. With components, hooks, and state management, it's a powerful tool for developers.",
       image: "https://via.placeholder.com/600x300?text=React+is+Awesome",
+      tags: ["React", "Frontend"]
     },
     {
       id: 3,
