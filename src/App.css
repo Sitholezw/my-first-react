@@ -412,3 +412,14 @@ button:hover, .read-more:hover {
     gap: 10px;
   }
 }
+
+@media (max-width: 600px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 16px;
+  }
+  .hero {
+    padding: 24px 0 16px 0;
+  }
+}
