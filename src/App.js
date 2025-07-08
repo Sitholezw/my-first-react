@@ -225,6 +225,10 @@ function App() {
         <a href="#about">About Me</a>
         <a href="#contact">Contact</a>
       </nav>
+      <header className="hero">
+        <h1>Welcome to My Blog</h1>
+        <p>Insights, tutorials, and stories from a passionate developer.</p>
+      </header>
       <main>
         {loading ? (
           <div className="spinner"></div>
