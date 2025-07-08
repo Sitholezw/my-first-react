@@ -388,6 +388,20 @@ main {
   margin-bottom: 32px;
 }
 
+button, .read-more {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover, .read-more:hover {
+  background: #0056b3;
+}
+
 @media (max-width: 768px) {
   .blog-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
