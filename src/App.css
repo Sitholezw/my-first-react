@@ -348,6 +348,19 @@ main {
   color: #fff;
 }
 
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 40px auto;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (max-width: 768px) {
   .blog-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
