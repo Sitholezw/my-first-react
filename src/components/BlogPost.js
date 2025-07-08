@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import './BlogPost.css';
+import BlogPost from './BlogPost';
 
 const BlogPost = ({ post, onReadMore }) => (
   <article className="blog-post visible">
@@ -11,6 +12,14 @@ const BlogPost = ({ post, onReadMore }) => (
       Read More
     </Button>
   </article>
+);
+
+const BlogList = ({ posts, onReadMore }) => (
+  <section id="blog" className="blog-grid">
+    {posts.map((post) => (
+      <BlogPost key={post.id} post={post} onReadMore={onReadMore} />
+    ))}
+  </section>
 );
 
 export default BlogPost;
