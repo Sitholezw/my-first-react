@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import emailjs from 'emailjs-com';
+import { Helmet } from "react-helmet";
 import './App.css';
 
 function App() {
@@ -207,6 +208,10 @@ function App() {
 
   return (
     <div className={`App ${darkMode ? 'dark-mode' : ''}`}>
+      <Helmet>
+        <title>My Blog - Home</title>
+        <meta name="description" content="A blog about web development, coding, and more." />
+      </Helmet>
       <header className="App-header">
         <h1>My Blog</h1>
         <p className="tagline">Sharing my thoughts and experiences</p>
