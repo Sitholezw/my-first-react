@@ -8,8 +8,8 @@ body {
 }
 
 body.dark-mode {
-  background-color: #121212;
-  color: #ffffff;
+  background: #181c24;
+  color: #f1f1f1;
 }
 
 html {
