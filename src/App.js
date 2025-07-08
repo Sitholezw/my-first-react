@@ -216,9 +216,15 @@ function App() {
       <header className="App-header">
         <h1>My Blog</h1>
         <p className="tagline">Sharing my thoughts and experiences</p>
-        <button className="dark-mode-toggle" onClick={toggleDarkMode}>
-          {darkMode ? "Light Mode" : "Dark Mode"}
-        </button>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={toggleDarkMode}
+            aria-label="Toggle dark mode"
+          />
+          <span className="slider"></span>
+        </label>
       </header>
       <nav className="App-nav">
         <a href="#blog">Blog</a>
