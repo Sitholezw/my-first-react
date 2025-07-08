@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import { Helmet } from "react-helmet";
+import Button from '@mui/material/Button';
 import './App.css';
 
 function App() {
@@ -254,9 +255,9 @@ function App() {
                   <img src={post.image} alt={post.title} className="blog-image" />
                   <h2>{post.title}</h2>
                   <p>{post.content}</p>
-                  <button className="read-more" onClick={() => openModal(post)}>
+                  <Button variant="contained" color="primary" className="read-more" onClick={() => openModal(post)}>
                     Read More
-                  </button>
+                  </Button>
                 </article>
               ))}
             </section>
