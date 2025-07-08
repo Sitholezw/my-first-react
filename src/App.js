@@ -114,9 +114,17 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [selectedTag, setSelectedTag] = useState("All");
 
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode) setDarkMode(savedMode === 'true');
+  }, []);
+
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle('dark-mode', !darkMode);
+    setDarkMode(prev => {
+      localStorage.setItem('darkMode', !prev);
+      document.body.classList.toggle('dark-mode', !prev);
+      return !prev;
+    });
   };
 
   const allTags = ["All", ...new Set(blogPosts.flatMap(post => post.tags || []))];
