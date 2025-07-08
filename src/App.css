@@ -329,6 +329,25 @@ main {
   }
 }
 
+.tag-filter {
+  margin: 20px 0;
+  text-align: center;
+}
+.tag-filter button {
+  margin: 0 5px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  background: #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tag-filter button.active,
+.tag-filter button:hover {
+  background: #007bff;
+  color: #fff;
+}
+
 @media (max-width: 768px) {
   .blog-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
