@@ -113,10 +113,16 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [selectedTag, setSelectedTag] = useState("All");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode) setDarkMode(savedMode === 'true');
+  }, []);
+
+  useEffect(() => {
+    // Simulate loading
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   const toggleDarkMode = () => {
@@ -214,64 +220,70 @@ function App() {
         <a href="#contact">Contact</a>
       </nav>
       <main>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search blog posts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-        <div className="tag-filter">
-          {allTags.map(tag => (
-            <button
-              key={tag}
-              className={selectedTag === tag ? "active" : ""}
-              onClick={() => setSelectedTag(tag)}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-        <section id="blog" className="blog-grid">
-          {filteredPosts.slice(indexOfFirstPost, indexOfLastPost).map((post) => (
-            <article key={post.id} className="blog-post visible">
-              <img src={post.image} alt={post.title} className="blog-image" />
-              <h2>{post.title}</h2>
-              <p>{post.content}</p>
-              <button className="read-more" onClick={() => openModal(post)}>
-                Read More
-              </button>
-            </article>
-          ))}
-        </section>
-        <div className="pagination">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index}
-              className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
-        <section id="about" className="about-section">
-          <h2>About Me</h2>
-          <p>
-            Hi, I'm a passionate developer who loves to share knowledge and build amazing things. This blog is my space to share my journey, thoughts, and experiences.
-          </p>
-        </section>
-        <section id="contact" className="contact-section">
-          <h2>Contact Me</h2>
-          <form onSubmit={sendEmail}>
-            <input type="text" name="user_name" placeholder="Your Name" required />
-            <input type="email" name="user_email" placeholder="Your Email" required />
-            <input type="subject" name="user_subject" placeholder="Your Subject here" required />
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send</button>
-          </form>
-        </section>
+        {loading ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            <div className="search-bar">
+              <input
+                type="text"
+                placeholder="Search blog posts..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+            <div className="tag-filter">
+              {allTags.map(tag => (
+                <button
+                  key={tag}
+                  className={selectedTag === tag ? "active" : ""}
+                  onClick={() => setSelectedTag(tag)}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+            <section id="blog" className="blog-grid">
+              {filteredPosts.slice(indexOfFirstPost, indexOfLastPost).map((post) => (
+                <article key={post.id} className="blog-post visible">
+                  <img src={post.image} alt={post.title} className="blog-image" />
+                  <h2>{post.title}</h2>
+                  <p>{post.content}</p>
+                  <button className="read-more" onClick={() => openModal(post)}>
+                    Read More
+                  </button>
+                </article>
+              ))}
+            </section>
+            <div className="pagination">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  className={`page-button ${currentPage === index + 1 ? 'active' : ''}`}
+                  onClick={() => handlePageChange(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
+            <section id="about" className="about-section">
+              <h2>About Me</h2>
+              <p>
+                Hi, I'm a passionate developer who loves to share knowledge and build amazing things. This blog is my space to share my journey, thoughts, and experiences.
+              </p>
+            </section>
+            <section id="contact" className="contact-section">
+              <h2>Contact Me</h2>
+              <form onSubmit={sendEmail}>
+                <input type="text" name="user_name" placeholder="Your Name" required />
+                <input type="email" name="user_email" placeholder="Your Email" required />
+                <input type="subject" name="user_subject" placeholder="Your Subject here" required />
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+              </form>
+            </section>
+          </>
+        )}
       </main>
       {modalData && (
         <div className="modal-overlay" onClick={closeModal}>
